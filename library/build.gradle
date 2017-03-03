@@ -18,6 +18,7 @@ android {
 
 dependencies {
     // add dependencies here
+    compile 'org.jdeferred:jdeferred-core:1.2.5'
 }
 
 // build a jar with source files
