@@ -103,11 +103,11 @@ class Client(private val context: Context) : BroadcastReceiver() {
             val ssid = info.ssid
 
             if (ni.state == NetworkInfo.State.CONNECTED) {
-                this.connectionObserver!!.onComplete()
+                this.connectionObserver?.onComplete()
             }
 
             if (ni.state == NetworkInfo.State.DISCONNECTED) {
-                this.disconnectObserver!!.onComplete()
+                this.disconnectObserver?.onComplete()
             }
         }
     }
