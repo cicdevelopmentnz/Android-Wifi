@@ -61,7 +61,13 @@ class Station(private val context: Context) {
                 }
 
                 override fun onFailure(reason: Int) {
-                    subscriber.onError(Throwable("Error: " + reason))
+                    if(reason == WifiP2pManager.P2P_UNSUPPORTED){
+                        subscriber.onError(Throwable("P2P UNSUPPORTED"))
+                    }else if(reason == WifiP2pManager.ERROR){
+                        subscriber.onError(Throwable("P2P INTERNAL ERROR"))
+                    }else{
+                        subscriber.onComplete()
+                    }
                 }
             })
 
