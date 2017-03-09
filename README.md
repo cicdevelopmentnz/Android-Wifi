@@ -1,5 +1,24 @@
 # Android-Wifi
 
+## Installation
+
+Add the following to your root build.gradle
+
+```gradle
+   allprojects {
+      repositories {
+         ...
+         maven { url 'https://jitpack.io' }
+      }
+   }
+```
+
+Add the dependency
+```gradle
+   dependencies {
+      compile 'com.github.cicdevelopmentnz:Android-WIFI:v0.0.1'
+   }
+```
 
 ## Usage
 
