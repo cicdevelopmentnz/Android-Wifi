@@ -43,10 +43,22 @@ class Station(private val context: Context) {
     }
 
     fun getInfo(emitter: FlowableEmitter<WifiP2pGroup>) {
+        this.recursiveGetInfo(emitter)
+    }
+
+    private fun recursiveGetInfo(emitter: FlowableEmitter<WifiP2pGroup>){
+        this._getInfo(0, 5, emitter)
+    }
+
+    private fun _getInfo(attempt: Int, limit: Int, emitter: FlowableEmitter<WifiP2pGroup>){
         this.p2pManager.requestGroupInfo(channel) { group ->
             if (group != null) {
                 emitter.onNext(group)
-            } else {
+            }else if(group == null && attempt < limit){
+                Thread.sleep(200)
+                var tmp_attempt = attempt.plus(1)
+                this._getInfo(tmp_attempt, limit, emitter)
+            }else {
                 emitter.onError(Throwable("No group available"))
             }
         }
