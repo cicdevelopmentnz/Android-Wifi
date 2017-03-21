@@ -60,7 +60,6 @@ class Client(private val context: Context) : BroadcastReceiver() {
             val netId = wifiManager.addNetwork(connectConfig)
             wifiManager.enableNetwork(netId, true)
 
-
         }, BackpressureStrategy.BUFFER)
 
     }
@@ -95,6 +94,8 @@ class Client(private val context: Context) : BroadcastReceiver() {
             val state = ni.state.toString()
             val ssid = info.ssid
 
+            println("State: " + state + " SSID: " + ssid)
+
             if (ni.state == NetworkInfo.State.CONNECTED) {
                 this.connectionObserver?.onComplete()
             }
@@ -106,7 +107,6 @@ class Client(private val context: Context) : BroadcastReceiver() {
     }
 
     companion object {
-
         var TIMEOUT = 15000
     }
 }
