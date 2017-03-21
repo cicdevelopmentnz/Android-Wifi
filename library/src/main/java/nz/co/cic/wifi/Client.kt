@@ -60,9 +60,6 @@ class Client(private val context: Context) : BroadcastReceiver() {
             val netId = wifiManager.addNetwork(connectConfig)
             wifiManager.enableNetwork(netId, true)
 
-            Handler().postDelayed({
-                subscriber.onError(Throwable("timeout"))
-            }, TIMEOUT.toLong())
 
         }, BackpressureStrategy.BUFFER)
 
@@ -73,10 +70,6 @@ class Client(private val context: Context) : BroadcastReceiver() {
             subscriber ->
             this.disconnectObserver = subscriber
             this.wifiManager.disconnect()
-
-            Handler().postDelayed({
-                subscriber.onError(Throwable("timeout"))
-            }, TIMEOUT.toLong())
 
         }, BackpressureStrategy.BUFFER)
 
